@@ -21,7 +21,7 @@ steps:
       username: root # 远程连接账号
       password:
         from_secret: ssh_password # 从Secret中读取SSH密码
-      port: 22 # 远程连接端口
+      port: 2222 # 远程连接端口
       command_timeout: 5m # 远程执行命令超时时间
       script:
         - cd /mydata/maven/build # 进入宿主机构建目录
