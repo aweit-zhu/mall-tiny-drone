@@ -19,7 +19,7 @@ steps: # 定义流水线执行步骤，这些步骤将顺序执行
   - name: build-start
     image: appleboy/drone-ssh # SSH工具镜像
     settings:
-      host: 192.168.5.78 # 远程连接地址
+      host: 172.31.93.122 # 远程连接地址
       username: root # 远程连接账号
       password:
         from_secret: ssh_password # 从Secret中读取SSH密码
