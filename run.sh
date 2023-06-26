@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 定义应用组名
-group_name='mall-tiny'
+group_name='aweit'
 # 定义应用名称
 app_name='mall-tiny-drone'
 # 定义应用版本
@@ -18,10 +18,7 @@ echo '----rm image----'
 docker build -t ${group_name}/${app_name}:${app_version} .
 echo '----build image----'
 docker run -p 8088:8088 --name ${app_name} \
---link mysql:db \
 -e 'spring.profiles.active'=${profile_active} \
--e TZ="Asia/Shanghai" \
--v /etc/localtime:/etc/localtime \
 -v /mydata/app/${app_name}/logs:/var/logs \
 -d ${group_name}/${app_name}:${app_version}
 echo '----start container----'
