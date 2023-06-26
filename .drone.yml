@@ -4,6 +4,11 @@ name: mall-tiny-drone
 steps:
   - name: package
     image: maven:3-jdk-8
+    volumes: 
+      - name: maven-cache
+        path: /root/.m2 # 将maven下载依赖的目录挂载出来，防止重复下载
+      - name: maven-build
+        path: /app/build # 将应用打包好的Jar和执行脚本挂载出来
     commands: 
       - mvn clean package
       - cp target/mall-tiny-drone-1.0-SNAPSHOT.jar /app/build/mall-tiny-drone-1.0-SNAPSHOT.jar
@@ -22,3 +27,11 @@ steps:
         - cd /mydata/maven/build # 进入宿主机构建目录
         - chmod +x run.sh # 更改为可执行脚本
         - ./run.sh # 运行脚本打包应用镜像并运行
+        
+volumes: # 定义流水线挂载目录，用于共享数据
+  - name: maven-build
+    host:
+      path: /mydata/maven/build # 从宿主机中挂载的目录
+  - name: maven-cache
+    host:
+      path: /mydata/maven/cache
